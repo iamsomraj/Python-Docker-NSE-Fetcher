@@ -1,10 +1,13 @@
 from typing import Dict, Union
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import uvicorn
 import httpx
 
 app = FastAPI()
+
+templates = Jinja2Templates(directory="templates")
 
 
 class StockData(BaseModel):
@@ -13,8 +16,19 @@ class StockData(BaseModel):
 
 
 @app.get("/")
-async def read_root() -> Dict[str, str]:
-    return {"Message": "Hello World"}
+async def read_root(request: Request) -> Dict[str, str]:
+    stock_data = StockData(exchange="INDEX", symbol="NIFTY_50")
+
+    fetched_data = await fetch(stock_data)
+
+    return templates.TemplateResponse(
+        "home.html",
+        {
+            "request": request,
+            "name": fetched_data.get("name"),
+            "price": fetched_data.get("price"),
+        },
+    )
 
 
 @app.post("/fetch/")
