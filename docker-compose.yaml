@@ -1,23 +1,23 @@
 networks:
+
   default:
-    external: true
-    name: wsl-net
+    name: nse-net
 
 services:
 
-  python-fastapi-nse:
+  python-fastapi-quote:
     build:
-      context: ./dock_second
+      context: ./quote
       dockerfile: Dockerfile
-    image: python-fastapi-nse
+    image: python-fastapi-quote
     ports:
       - "8000:8000"
     command: python ./app/main.py
-    container_name: python-fastapi-nse
+    container_name: python-fastapi-quote
 
   python-fastapi-fetcher:
     build:
-      context: ./dock_third
+      context: ./fetcher
       dockerfile: Dockerfile
     image: python-fastapi-fetcher
     ports:

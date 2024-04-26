@@ -20,7 +20,7 @@ async def read_root(request: Request) -> Dict[str, str]:
     async with httpx.AsyncClient() as client:
         try:
             response = await client.get(
-                f"http://python-fastapi-nse:8000/index/{stock_data['symbol']}"
+                f"http://python-fastapi-quote:8000/index/{stock_data['symbol']}"
             )
             response.raise_for_status()
             fetched_data = response.json()
@@ -67,8 +67,8 @@ async def fetch(
 ) -> Dict[str, Union[str, Dict[str, str]]]:
 
     urls = {
-        "NSE": f"http://python-fastapi-nse:8000/nse/{symbol}",
-        "INDEX": f"http://python-fastapi-nse:8000/index/{symbol}",
+        "NSE": f"http://python-fastapi-quote:8000/nse/{symbol}",
+        "INDEX": f"http://python-fastapi-quote:8000/index/{symbol}",
     }
 
     if exchange not in urls:
