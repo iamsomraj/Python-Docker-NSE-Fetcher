@@ -15,6 +15,16 @@ services:
     command: python ./app/main.py
     container_name: python-fastapi-quote
 
+  python-fastapi-search:
+    build:
+      context: ./search
+      dockerfile: Dockerfile
+    image: python-fastapi-search
+    ports:
+      - "8002:8002"
+    command: python ./app/main.py
+    container_name: python-fastapi-search
+
   python-fastapi-fetcher:
     build:
       context: ./fetcher
