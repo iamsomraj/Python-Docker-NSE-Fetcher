@@ -1,7 +1,6 @@
 from typing import Dict, Union
 from fastapi import FastAPI, Request, Form, HTTPException
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
 import uvicorn
 import httpx
 
@@ -11,7 +10,7 @@ templates = Jinja2Templates(directory="templates")
 
 
 @app.get("/")
-async def read_root(request: Request) -> Dict[str, str]:
+async def home_page(request: Request) -> Dict[str, str]:
     stock_data = {
         "exchange": "INDEX",
         "symbol": "NIFTY_50",
@@ -59,6 +58,16 @@ async def fetch_page(request: Request) -> Dict[str, str]:
     )
 
 
+@app.get("/search/")
+async def search_page(request: Request) -> Dict[str, str]:
+    return templates.TemplateResponse(
+        "search.html",
+        {
+            "request": request,
+        },
+    )
+
+
 @app.post("/fetch/")
 async def fetch(
     request: Request,
@@ -100,6 +109,36 @@ async def fetch(
             "request": request,
             "name": fetched_data.get("name"),
             "price": fetched_data.get("price"),
+        },
+    )
+
+
+@app.post("/search/")
+async def search(
+    request: Request,
+    search_str: str = Form(...),
+) -> Dict[str, Union[str, Dict[str, str]]]:
+
+    url = f"http://python-fastapi-search:8002/search/{search_str}"
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get(url)
+            response.raise_for_status()
+            fetched_data = response.json()
+
+        except httpx.HTTPStatusError as e:
+            raise HTTPException(status_code=500, detail="Error fetching data")
+        except Exception as e:
+            raise HTTPException(
+                status_code=500, detail="Error parsing response"
+            )
+
+    return templates.TemplateResponse(
+        "search.html",
+        {
+            "request": request,
+            "search_result": fetched_data,
         },
     )
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Stock Information</title>
+</head>
+
+<body class="bg-gray-100 font-roboto">
+  <div class="container mx-auto mt-5 p-4">
+    <nav class="bg-blue-500 p-4 mb-5 rounded-md shadow-md">
+      <div class="container mx-auto flex justify-between items-center">
+        <div class="text-white font-bold text-xl">Stock Search</div>
+        <div>
+          <a href="/" class="text-white hover:text-gray-200 px-4">
+            Dashboard
+          </a>
+          <a href="/fetch" class="text-white hover:text-gray-200 px-4">
+            Fetch
+          </a>
+        </div>
+      </div>
+    </nav>
+    <h1 class="text-3xl font-semibold mb-4">Stock Search</h1>
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      {% for key, value in search_result.items() %}
+      <div class="mb-4">
+        <h2 class="text-xl font-semibold mb-2">Stock Name</h2>
+        <p class="text-lg text-gray-700"> {{ key }} </p>
+      </div>
+      <div>
+        <h2 class="text-xl font-semibold mb-2">Stock Symbol</h2>
+        <p class="text-lg text-gray-700"> {{ value }} </p>
+      </div>
+      {% endfor %}
+    </div>
+    <p class="mt-8 text-gray-600">Note: The stock information displayed here is for illustrative purposes only and may
+      not reflect real-time data.</p>
+  </div>
+</body>
+
+</html>
