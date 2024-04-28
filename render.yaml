@@ -2,7 +2,7 @@ services:
   - type: web
     name: python-fastapi-quote
     env: docker
-    dockerfile_path: ./quote/Dockerfile
+    dockerfilePath: ./quote/Dockerfile
     env_vars:
       - key: PORT
         value: 8000
@@ -11,7 +11,7 @@ services:
   - type: web
     name: python-fastapi-search
     env: docker
-    dockerfile_path: ./search/Dockerfile
+    dockerfilePath: ./search/Dockerfile
     env_vars:
       - key: PORT
         value: 8002
@@ -20,7 +20,7 @@ services:
   - type: web
     name: python-fastapi-fetcher
     env: docker
-    dockerfile_path: ./fetcher/Dockerfile
+    dockerfilePath: ./fetcher/Dockerfile
     env_vars:
       - key: PORT
         value: 8001
