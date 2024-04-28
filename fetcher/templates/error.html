@@ -10,7 +10,6 @@
     />
     <title>Stock Information</title>
   </head>
-
   <body class="bg-gray-100 font-roboto">
     <nav class="mb-5 bg-blue-500 p-4 shadow-md">
       <div
@@ -47,40 +46,25 @@
           </button>
         </form>
         <div class="flex items-center gap-4">
-          <a href="/" class="text-white hover:text-gray-200"> Dashboard </a>
-          <a href="/fetch" class="text-white hover:text-gray-200"> Fetch </a>
+          <a href="/" class="text-white hover:text-gray-200">Dashboard</a>
+          <a href="/fetch" class="text-white hover:text-gray-200">Fetch</a>
         </div>
       </div>
     </nav>
 
     <div class="container mx-auto">
-      <h1 class="text-3xl font-semibold mb-4">Stock Search</h1>
-      <div class="grid grid-cols-3 gap-4">
-        {% for key, value in search_result.items() %}
-        <form
-          method="post"
-          action="/fetch/"
-          class="flex flex-col gap-4 bg-white rounded-lg cursor-pointer shadow-md"
-        >
-          <input class="hidden" name="symbol" value="{{ value }}" />
-          <input class="hidden" name="exchange" value="NSE" />
-          <button
-            type="submit"
-            class="flex flex-col bg-white gap-2 p-4 rounded-lg w-full h-full hover:bg-gray-100 transition duration-300 ease-in-out"
-          >
-            <p
-              class="text-xl text-gray-700 font-bold uppercase text-left"
-              title="{{ key }}"
-            >
-              {{ key }}
-            </p>
-            <p class="text-lg text-gray-500 uppercase text-left font-medium">
-              {{ value }}
-            </p>
-          </button>
-        </form>
-        {% endfor %}
+      <h1 class="text-3xl font-semibold mb-4">Oops ! Something Went Wrong</h1>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="mb-4">
+          <h2 class="text-xl font-semibold mb-2">Status Code</h2>
+          <p class="text-lg text-gray-700">{{ status_code }}</p>
+        </div>
+        <div>
+          <h2 class="text-xl font-semibold mb-2">Issue Description</h2>
+          <p class="text-lg text-gray-700">{{ error_message }}</p>
+        </div>
       </div>
+      <p class="mt-8 text-gray-600"></p>
     </div>
   </body>
 </html>

@@ -24,22 +24,40 @@ async def home_page(request: Request) -> templates.TemplateResponse:
             fetched_data = response.json()
         except httpx.HTTPStatusError as e:
             if e.response.status_code == 404:
-                raise HTTPException(
-                    status_code=404,
-                    detail="Symbol not found or HTML structure changed",
+                return templates.TemplateResponse(
+                    "error.html",
+                    {
+                        "error_message": "Symbol not found or HTML structure changed",
+                        "status_code": e.response.status_code,
+                        "request": request,
+                    },
                 )
             else:
-                raise HTTPException(
-                    status_code=500,
-                    detail="Error fetching data from the quote service.",
+                return templates.TemplateResponse(
+                    "error.html",
+                    {
+                        "error_message": "Error fetching data from the quote service",
+                        "status_code": e.response.status_code,
+                        "request": request,
+                    },
                 )
         except httpx.RequestError as e:
-            raise HTTPException(
-                status_code=500, detail="Request to quote service failed."
+            return templates.TemplateResponse(
+                "error.html",
+                {
+                    "error_message": "Request to quote service failed",
+                    "status_code": 500,
+                    "request": request,
+                },
             )
         except Exception as e:
-            raise HTTPException(
-                status_code=500, detail="An unexpected error occurred."
+            return templates.TemplateResponse(
+                "error.html",
+                {
+                    "error_message": "An unexpected error occurred",
+                    "status_code": 500,
+                    "request": request,
+                },
             )
 
     return templates.TemplateResponse(
@@ -79,22 +97,40 @@ async def fetch(
             fetched_data = response.json()
         except httpx.HTTPStatusError as e:
             if e.response.status_code == 404:
-                raise HTTPException(
-                    status_code=404,
-                    detail="Symbol not found or HTML structure changed",
+                return templates.TemplateResponse(
+                    "error.html",
+                    {
+                        "error_message": "Symbol not found or HTML structure changed",
+                        "status_code": e.response.status_code,
+                        "request": request,
+                    },
                 )
             else:
-                raise HTTPException(
-                    status_code=500,
-                    detail="Error fetching data from the quote service.",
+                return templates.TemplateResponse(
+                    "error.html",
+                    {
+                        "error_message": "Error fetching data from the quote service",
+                        "status_code": e.response.status_code,
+                        "request": request,
+                    },
                 )
         except httpx.RequestError as e:
-            raise HTTPException(
-                status_code=500, detail="Request to quote service failed."
+            return templates.TemplateResponse(
+                "error.html",
+                {
+                    "error_message": "Request to quote service failed",
+                    "status_code": 500,
+                    "request": request,
+                },
             )
         except Exception as e:
-            raise HTTPException(
-                status_code=500, detail="An unexpected error occurred."
+            return templates.TemplateResponse(
+                "error.html",
+                {
+                    "error_message": "An unexpected error occurred",
+                    "status_code": 500,
+                    "request": request,
+                },
             )
 
     return templates.TemplateResponse(
@@ -122,14 +158,41 @@ async def search(
             fetched_data = response.json()
 
         except httpx.HTTPStatusError as e:
-            raise HTTPException(status_code=500, detail="Error fetching data")
+            if e.response.status_code == 404:
+                return templates.TemplateResponse(
+                    "error.html",
+                    {
+                        "error_message": "Data not found",
+                        "status_code": e.response.status_code,
+                        "request": request,
+                    },
+                )
+            else:
+                return templates.TemplateResponse(
+                    "error.html",
+                    {
+                        "error_message": "Error fetching data",
+                        "status_code": e.response.status_code,
+                        "request": request,
+                    },
+                )
         except httpx.RequestError as e:
-            raise HTTPException(
-                status_code=500, detail="Request to search service failed."
+            return templates.TemplateResponse(
+                "error.html",
+                {
+                    "error_message": "Request to search service failed",
+                    "status_code": 500,
+                    "request": request,
+                },
             )
         except Exception as e:
-            raise HTTPException(
-                status_code=500, detail="An unexpected error occurred."
+            return templates.TemplateResponse(
+                "error.html",
+                {
+                    "error_message": "An unexpected error occurred",
+                    "status_code": 500,
+                    "request": request,
+                },
             )
 
     return templates.TemplateResponse(
