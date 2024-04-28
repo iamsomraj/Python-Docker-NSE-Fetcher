@@ -4,17 +4,19 @@ services:
   name: python-fastapi-quote
   env: docker
   dockerfilePath: ./quote/Dockerfile
-  port: 8000
+  - key: PORT
+    value: 8000
 
 - type: web
   name: python-fastapi-search
   env: docker
   dockerfilePath: ./search/Dockerfile
-  port: 8002
+  - key: PORT
+    value: 8002
 
 - type: web
   name: python-fastapi-fetcher
   env: docker
   dockerfilePath: ./fetcher/Dockerfile
-  command: python ./app/main.py
-  port: 8002
+  - key: PORT
+    value: 8001
