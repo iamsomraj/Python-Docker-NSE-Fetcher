@@ -14,26 +14,49 @@
     <title>Stock Information</title>
   </head>
   <body class="bg-gray-100 font-roboto">
-    <div class="container mx-auto mt-5 p-4">
-      <nav class="bg-blue-500 p-4 mb-5 rounded-md shadow-md">
-        <div class="container mx-auto flex justify-between items-center">
-          <div class="text-white font-bold text-xl">Stock Information</div>
-          <div>
-            <a
-              href="/"
-              class="text-white hover:text-gray-200 px-4"
+    <nav class="mb-5 bg-blue-500 p-4 shadow-md">
+      <div class="container mx-auto flex flex-wrap items-center justify-between gap-4">
+        <div class="text-xl font-bold text-white">Stock Information</div>
+        <form class="flex items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="rounded-l-lg border border-none px-4 py-2 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button class="rounded-r-lg border-none bg-white px-4 py-2 font-bold text-gray-800 hover:bg-gray-200">
+            <svg
+              class="w-6Ï h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-6 w-6"
             >
-              Dashboard
-            </a>
-            <a
-              href="/fetch"
-              class="text-white hover:text-gray-200 px-4"
-            >
-              Fetch
-            </a>
-          </div>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+          </button>
+        </form>
+        <div class="flex items-center gap-4">
+          <a
+            href="/"
+            class="text-white hover:text-gray-200"
+            >Dashboard</a
+          >
+          <a
+            href="/fetch"
+            class="text-white hover:text-gray-200"
+            >Fetch</a
+          >
         </div>
-      </nav>
+      </div>
+    </nav>
+
+    <div class="container mx-auto">
       <h1 class="text-3xl font-semibold mb-4">Stock Information</h1>
       <div class="bg-white p-6 rounded-lg shadow-md">
         <div class="mb-4">
