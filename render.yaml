@@ -1,28 +1,18 @@
----  # separates service definitions
 
-# Service 1: python-fastapi-quote
 services:
-  type: web
+- type: web
   name: python-fastapi-quote
   env: docker
   dockerfilePath: ./quote/Dockerfile
   port: 8000
 
----  # separates service definitions
-
-# Service 2: python-fastapi-search
-services:
-  type: web
+- type: web
   name: python-fastapi-search
   env: docker
   dockerfilePath: ./search/Dockerfile
   port: 8002
 
----  # separates service definitions
-
-# Service 3: python-fastapi-fetcher & Main Application
-services:
-  type: web
+- type: web
   name: python-fastapi-fetcher
   env: docker
   dockerfilePath: ./fetcher/Dockerfile
