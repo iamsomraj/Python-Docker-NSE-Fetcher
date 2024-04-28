@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
@@ -13,11 +16,13 @@
 
   <body class="bg-gray-100 font-roboto">
     <nav class="mb-5 bg-blue-500 p-4 shadow-md">
-      <div
-        class="container mx-auto flex flex-wrap items-center justify-between gap-4"
-      >
+      <div class="container mx-auto flex flex-wrap items-center justify-between gap-4">
         <div class="text-xl font-bold text-white">Stock Information</div>
-        <form method="post" action="/search/" class="flex items-center">
+        <form
+          method="post"
+          action="/search/"
+          class="flex items-center"
+        >
           <input
             id="search_str"
             name="search_str"
@@ -47,8 +52,18 @@
           </button>
         </form>
         <div class="flex items-center gap-4">
-          <a href="/" class="text-white hover:text-gray-200">Dashboard</a>
-          <a href="/fetch" class="text-white hover:text-gray-200">Fetch</a>
+          <a
+            href="/"
+            class="text-white hover:text-gray-200"
+          >
+            Dashboard
+          </a>
+          <a
+            href="/fetch"
+            class="text-white hover:text-gray-200"
+          >
+            Fetch
+          </a>
         </div>
       </div>
     </nav>
@@ -57,31 +72,36 @@
       <h1 class="text-3xl font-semibold mb-4">Stock Search</h1>
       <div class="grid grid-cols-3 gap-4">
         {% for key, value in search_result.items() %}
-        <div
-          class="flex flex-col gap-4 bg-white rounded-lg shadow-md p-4 hover:bg-gray-200"
-          style="cursor: pointer"
-          onclick="submitForm(this)"
+        <form
+          method="post"
+          action="/fetch/"
+          class="flex flex-col gap-4 bg-white rounded-lg cursor-pointer shadow-md"
         >
-          <form method="post" action="/fetch/">
-            <input type="hidden" name="symbol" value="{{ value }}" />
-            <input type="hidden" name="exchange" value="NSE" />
-            <div class="flex flex-col gap-2">
-              <p class="text-2xl text-gray-700 font-bold" title="{{ key }}">
-                {{ key }}
-              </p>
-              <p class="text-lg text-gray-500 font-medium">{{ value }}</p>
-            </div>
-          </form>
-        </div>
+          <input
+            class="hidden"
+            name="symbol"
+            value="{{ value }}"
+          />
+          <input
+            class="hidden"
+            name="exchange"
+            value="NSE"
+          />
+          <button
+            type="submit"
+            class="flex flex-col bg-white gap-2 p-4 rounded-lg w-full h-full hover:bg-gray-100 transition duration-300 ease-in-out"
+          >
+            <p
+              class="text-xl text-gray-700 font-bold uppercase text-center"
+              title="{{ key }}"
+            >
+              {{ key }}
+            </p>
+            <p class="text-lg text-gray-500 uppercase text-center font-medium">{{ value }}</p>
+          </button>
+        </form>
         {% endfor %}
       </div>
     </div>
   </body>
 </html>
-
-<script>
-  function submitForm(divElement) {
-    const form = divElement.querySelector("form");
-    form.submit();
-  }
-</script>
