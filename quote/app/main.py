@@ -5,9 +5,9 @@ import httpx
 from bs4 import BeautifulSoup
 
 GOOGLE_FINANCE = "https://www.google.com/finance/quote/"
-EXCHANGE = {
+QUOTE = {
     "index": "INDEXNSE",
-    "nse": "NSE",
+    "equity": "NSE",
 }
 
 app = FastAPI()
@@ -18,8 +18,10 @@ async def read_root() -> Dict[str, str]:
     return {"message": "Hello Google Finance"}
 
 
-async def get_price(symbol: str, exchange: str) -> Dict[str, Union[str, None]]:
-    url = f"{GOOGLE_FINANCE}{symbol}:{exchange}"
+async def get_price(
+    symbol: str, quote_option: str
+) -> Dict[str, Union[str, None]]:
+    url = f"{GOOGLE_FINANCE}{symbol}:{quote_option}"
 
     async with httpx.AsyncClient() as client:
         try:
@@ -50,12 +52,12 @@ async def get_price(symbol: str, exchange: str) -> Dict[str, Union[str, None]]:
 
 @app.get("/index/{symbol}")
 async def get_index_price(symbol: str) -> Dict[str, Union[str, None]]:
-    return await get_price(symbol, EXCHANGE["index"])
+    return await get_price(symbol, QUOTE["index"])
 
 
-@app.get("/nse/{symbol}")
+@app.get("/equity/{symbol}")
 async def get_nse_price(symbol: str) -> Dict[str, Union[str, None]]:
-    return await get_price(symbol, EXCHANGE["nse"])
+    return await get_price(symbol, QUOTE["equity"])
 
 
 if __name__ == "__main__":

@@ -11,7 +11,7 @@
       <div
         class="container mx-auto flex flex-wrap items-center justify-between gap-4"
       >
-        <div class="text-xl font-bold text-white">Stocker</div>
+        <a href="/" class="text-xl font-bold text-white">Stocker</a>
         <form method="post" action="/search/" class="flex items-center">
           <input
             id="search_str"
@@ -56,7 +56,7 @@
         <div class="p-6">
           <h5 class="text-2xl font-bold text-center mb-4">Stock Information</h5>
           <p class="text-sm text-gray-600 mb-4">
-            Enter the stock symbol and exchange to get the latest stock
+            Enter the stock symbol and quote option to get the latest stock
             information.
           </p>
           <form method="post" action="/fetch/" class="space-y-4">
@@ -72,13 +72,15 @@
               />
             </div>
             <div class="flex flex-col space-y-1">
-              <label for="exchange" class="stock-label">Exchange:</label>
+              <label for="quote_option" class="stock-label"
+                >Quote Option:</label
+              >
               <select
                 class="border rounded-md py-2 px-3"
-                id="exchange"
-                name="exchange"
+                id="quote_option"
+                name="quote_option"
               >
-                <option value="NSE">NSE</option>
+                <option value="EQUITY">EQUITY</option>
                 <option value="INDEX">INDEX</option>
               </select>
             </div>

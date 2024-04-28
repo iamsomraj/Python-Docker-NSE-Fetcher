@@ -11,7 +11,7 @@ templates = Jinja2Templates(directory="templates")
 @app.get("/")
 async def home_page(request: Request) -> templates.TemplateResponse:
     stock_data = {
-        "exchange": "INDEX",
+        "quote_option": "INDEX",
         "symbol": "NIFTY_50",
     }
 
@@ -78,21 +78,21 @@ async def fetch_page(request: Request) -> templates.TemplateResponse:
 @app.post("/fetch/")
 async def fetch(
     request: Request,
-    exchange: str = Form(...),
+    quote_option: str = Form(...),
     symbol: str = Form(...),
 ) -> templates.TemplateResponse:
 
     urls = {
-        "NSE": f"http://python-fastapi-quote:8000/nse/{symbol}",
+        "EQUITY": f"http://python-fastapi-quote:8000/equity/{symbol}",
         "INDEX": f"http://python-fastapi-quote:8000/index/{symbol}",
     }
 
-    if exchange not in urls:
-        raise HTTPException(status_code=400, detail="Invalid exchange")
+    if quote_option not in urls:
+        raise HTTPException(status_code=400, detail="Invalid quote option")
 
     async with httpx.AsyncClient() as client:
         try:
-            response = await client.get(urls[exchange])
+            response = await client.get(urls[quote_option])
             response.raise_for_status()
             fetched_data = response.json()
         except httpx.HTTPStatusError as e:

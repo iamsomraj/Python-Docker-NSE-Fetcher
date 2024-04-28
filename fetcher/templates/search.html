@@ -16,7 +16,7 @@
       <div
         class="container mx-auto flex flex-wrap items-center justify-between gap-4"
       >
-        <div class="text-xl font-bold text-white">Stocker</div>
+        <a href="/" class="text-xl font-bold text-white">Stocker</a>
         <form method="post" action="/search/" class="flex items-center">
           <input
             id="search_str"
@@ -64,7 +64,7 @@
           class="flex flex-col gap-4 bg-white rounded-lg cursor-pointer shadow-md"
         >
           <input class="hidden" name="symbol" value="{{ value }}" />
-          <input class="hidden" name="exchange" value="NSE" />
+          <input class="hidden" name="quote_option" value="EQUITY" />
           <button
             type="submit"
             class="flex flex-col bg-white gap-2 p-4 rounded-lg w-full h-full hover:bg-gray-100 transition duration-300 ease-in-out"
